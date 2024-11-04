@@ -1,3 +1,54 @@
+:root {
+  --border-color: #d7d7d7;
+  --spacing: 1rem;
+  --spacing-m: 2rem;
+  --padding: 1rem;
+}
+
 body {
   font-family: system-ui;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.main-layout {
+  min-width: 300px;
+  max-width: 720px;
+  margin: auto;
+  .page-wrapper {
+    min-height: 500px;
+    margin-top: 2rem;
+  }
+}
+
+.main-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  menu {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.dropdown-button {
+  ul {
+    position: absolute;
+    background: #fff;
+    border: solid 1px var(--border-color);
+    padding: var(--padding);
+
+    &.show {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing);
+    }
+
+    &.hide {
+      display: none;
+    }
+  }
 }
