@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import RootPage from "./pages/RootPage";
 
 export default function App() {
   return (
@@ -7,7 +8,7 @@ export default function App() {
       <Navbar />
       <div className="page-wrapper">
         <Routes>
-          <Route path="/" element={<div>Root path</div>} />
+          <Route path="/" element={<RootPage />} />
         </Routes>
       </div>
     </div>
