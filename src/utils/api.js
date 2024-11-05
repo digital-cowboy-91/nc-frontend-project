@@ -18,3 +18,8 @@ export const patchComment = (id, inc_votes) =>
 
 export const patchArticle = (id, inc_votes) =>
   api.patch(`/articles/${id}`, { inc_votes }).then((res) => res.data);
+
+export const postComment = (id, { username, body }) =>
+  api
+    .post(`/articles/${id}/comments`, { username, body })
+    .then((res) => res.data);
