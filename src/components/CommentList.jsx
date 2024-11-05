@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getArticleComments } from "../utils/api";
-import Loader from "./Loader";
+import Spinner from "./Spinner";
 import { normalizeDate } from "../utils/normalizeDate";
 import LikeButton from "./LikeButton";
 import VoteButton from "./VoteButton";
@@ -16,7 +16,7 @@ const CommentList = ({ articleId }) => {
       .finally(() => setIsLoading(false));
   }, [reload]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <Spinner />;
 
   return (
     <ul className="layout-wrapper">
