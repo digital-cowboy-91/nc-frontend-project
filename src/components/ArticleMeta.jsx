@@ -1,16 +1,21 @@
 import React from "react";
 import { normalizeDate } from "../utils/normalizeDate";
-import LikeButton from "./LikeButton";
+import Votes from "./Votes";
+import VoteStat from "./VoteStat";
 
 const ArticleMeta = ({ article, interactive }) => {
-  const { created_at, author, votes } = article;
+  const { article_id, created_at, author, votes } = article;
 
   return (
     <summary className="article-meta">
       <div className="details">
         Published {normalizeDate(created_at)} by {author}
       </div>
-      <LikeButton value={votes} interactive={interactive} />
+      {interactive ? (
+        <Votes defaultValue={votes} type="article" typeId={article_id} />
+      ) : (
+        <VoteStat value={votes} />
+      )}
     </summary>
   );
 };

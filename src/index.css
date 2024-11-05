@@ -3,6 +3,8 @@
   --background-color: #fbfbfb;
   --subtle-color: #d7d7d7;
   --light-color: #ffffff;
+  --positive-color: #d94e4e;
+  --negative-color: #6161e2;
   --spacing: 1rem;
   --spacing-m: 2rem;
   --padding: 1rem;
@@ -98,8 +100,8 @@ hr {
   align-items: center;
 }
 
-.btn-like {
-  height: 2rem;
+.vote-stat {
+  height: 1rem;
   display: flex;
   align-items: center;
   gap: calc(var(--spacing) / 2);
@@ -110,7 +112,7 @@ hr {
   font-weight: 700;
   color: var(--light-color);
 
-  background-color: #d94e4e;
+  background-color: var(--positive-color);
 
   svg {
     width: 100%;
@@ -232,4 +234,22 @@ hr {
 .vote-wrapper {
   display: flex;
   align-items: center;
+  border-radius: 1rem;
+
+  &.positive,
+  &.negative {
+    color: var(--light-color);
+
+    svg {
+      color: var(--light-color);
+    }
+  }
+
+  &.positive {
+    background-color: var(--positive-color);
+  }
+
+  &.negative {
+    background-color: var(--negative-color);
+  }
 }
