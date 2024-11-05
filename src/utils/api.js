@@ -9,3 +9,12 @@ export const getArticles = () => api.get("/articles").then((res) => res.data);
 
 export const getArticleById = (id) =>
   api.get(`/articles/${id}`).then((res) => res.data);
+
+export const getArticleComments = (id) =>
+  api.get(`/articles/${id}/comments`).then((res) => res.data);
+
+export const patchComment = (id, inc_votes) =>
+  api.patch(`/comments/${id}`, { inc_votes }).then((res) => res.data);
+
+export const patchArticle = (id, inc_votes) =>
+  api.patch(`/articles/${id}`, { inc_votes }).then((res) => res.data);

@@ -1,22 +1,21 @@
 import React from "react";
-import { MdiHeart } from "./MDIHeart";
+import { normalizeDate } from "../utils/normalizeDate";
+import Votes from "./Votes";
+import VoteStat from "./VoteStat";
 
 const ArticleMeta = ({ article, interactive }) => {
-  const { created_at, author, votes } = article;
-
-  const transformedDate = new Date(created_at).toLocaleString("en-GB", {
-    dateStyle: "long",
-  });
+  const { article_id, created_at, author, votes } = article;
 
   return (
     <summary className="article-meta">
       <div className="details">
-        Published {transformedDate} by {author}
+        Published {normalizeDate(created_at)} by {author}
       </div>
-      <button className="btn-like" disabled={!interactive}>
-        <span>{votes}</span>
-        <MdiHeart />
-      </button>
+      {interactive ? (
+        <Votes defaultValue={votes} type="article" typeId={article_id} />
+      ) : (
+        <VoteStat value={votes} />
+      )}
     </summary>
   );
 };
