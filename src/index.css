@@ -20,6 +20,7 @@ body {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 a {
@@ -40,7 +41,6 @@ hr {
   margin: auto;
   .page-wrapper {
     min-height: 500px;
-    margin-top: 2rem;
   }
 }
 
