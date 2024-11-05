@@ -1,6 +1,6 @@
 import React from "react";
 
-export function MdiHeart(props) {
+export function IconHeart(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

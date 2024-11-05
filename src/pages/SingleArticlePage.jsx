@@ -21,17 +21,19 @@ const SingleArticlePage = () => {
 
   return (
     <>
-      <article className="content">
+      <article className="content-wrapper">
         <div className="image-wrapper">
           <img src={article_img_url} />
         </div>
         <h1>{title}</h1>
         <p>{body}</p>
       </article>
-      <hr />
-      <ArticleMeta article={article} interactive />
-      <hr />
-      <CommentList />
+      <div className="content-wrapper">
+        <hr />
+        <ArticleMeta article={article} interactive />
+        <hr />
+      </div>
+      <CommentList articleId={article_id} />
     </>
   );
 };

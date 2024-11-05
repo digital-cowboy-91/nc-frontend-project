@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div className="main-layout">
       <Navbar />
-      <div className="page-wrapper content">
+      <div className="page-wrapper layout-wrapper">
         <Routes>
           <Route path="/" element={<RootPage />} />
           <Route path="/article/:article_id" element={<SingleArticlePage />} />
