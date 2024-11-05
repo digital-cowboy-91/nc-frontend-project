@@ -6,3 +6,6 @@ const api = axios.create({ baseURL: API_BASE_URL });
 export const getTopics = () => api.get("/topics").then((res) => res.data);
 
 export const getArticles = () => api.get("/articles").then((res) => res.data);
+
+export const getArticleById = (id) =>
+  api.get(`/articles/${id}`).then((res) => res.data);

@@ -1,7 +1,7 @@
 import React from "react";
 import { MdiHeart } from "./MDIHeart";
 
-const ArticleMeta = ({ article }) => {
+const ArticleMeta = ({ article, interactive }) => {
   const { created_at, author, votes } = article;
 
   const transformedDate = new Date(created_at).toLocaleString("en-GB", {
@@ -13,7 +13,7 @@ const ArticleMeta = ({ article }) => {
       <div className="details">
         Published {transformedDate} by {author}
       </div>
-      <button className="btn-like" disabled>
+      <button className="btn-like" disabled={!interactive}>
         <span>{votes}</span>
         <MdiHeart />
       </button>
