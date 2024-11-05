@@ -3,8 +3,7 @@ import { getArticleComments } from "../utils/api";
 import Spinner from "./Spinner";
 import CommentCard from "./CommentCard";
 
-const CommentList = ({ articleId }) => {
-  const [reload, setReload] = useState(false);
+const CommentList = ({ articleId, injectThis }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -12,12 +11,16 @@ const CommentList = ({ articleId }) => {
     getArticleComments(articleId)
       .then((data) => setComments(data.comments))
       .finally(() => setIsLoading(false));
-  }, [reload]);
+  }, []);
+
+  useEffect(() => {
+    setComments((prevVal) => [injectThis, ...prevVal]);
+  }, [injectThis]);
 
   if (isLoading) return <Spinner />;
 
   return (
-    <ul className="layout-wrapper">
+    <ul className="content-wrapper">
       {comments.map((comment) => {
         return (
           <li key={comment.comment_id}>

@@ -4,11 +4,13 @@ import { getArticleById } from "../utils/api";
 import ArticleMeta from "../components/ArticleMeta";
 import CommentList from "../components/CommentList";
 import Spinner from "../components/Spinner";
+import CommentForm from "../components/CommentForm";
 
 const SingleArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [injectComment, setInjectComment] = useState();
 
   useEffect(() => {
     getArticleById(article_id)
@@ -34,7 +36,11 @@ const SingleArticlePage = () => {
         <ArticleMeta article={article} interactive />
         <hr />
       </div>
-      <CommentList articleId={article_id} />
+      <CommentForm
+        articleId={article_id}
+        onResponse={(comment) => setInjectComment(comment)}
+      />
+      <CommentList articleId={article_id} injectThis={injectComment} />
     </>
   );
 };

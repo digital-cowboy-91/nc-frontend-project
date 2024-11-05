@@ -253,3 +253,10 @@ hr {
     background-color: var(--negative-color);
   }
 }
+
+.comment-form {
+  footer {
+    display: flex;
+    justify-content: end;
+  }
+}
