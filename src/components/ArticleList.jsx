@@ -4,12 +4,12 @@ import ArticleCard from "./ArticleCard";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 
-const ArticleList = () => {
+const ArticleList = ({ queries }) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getArticles()
+    getArticles(queries)
       .then((data) => setArticles(data.articles))
       .finally(() => setIsLoading(false));
   }, []);
