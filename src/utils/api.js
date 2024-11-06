@@ -25,3 +25,6 @@ export const postComment = (id, { username, body }) =>
     .then((res) => res.data);
 
 export const deleteComment = (id) => api.delete(`/comments/${id}`);
+
+export const getUserByUsername = (username) =>
+  api.get(`/users/${username}`).then((res) => res.data);
