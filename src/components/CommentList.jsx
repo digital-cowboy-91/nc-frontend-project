@@ -17,6 +17,12 @@ const CommentList = ({ articleId, injectThis }) => {
     setComments((prevVal) => [injectThis, ...prevVal]);
   }, [injectThis]);
 
+  function handleDelete(idToDelete) {
+    setComments((prevVal) =>
+      prevVal.filter(({ comment_id }) => comment_id !== idToDelete)
+    );
+  }
+
   if (isLoading) return <Spinner />;
 
   return (
@@ -24,7 +30,7 @@ const CommentList = ({ articleId, injectThis }) => {
       {comments.map((comment) => {
         return (
           <li key={comment.comment_id}>
-            <CommentCard data={comment} />
+            <CommentCard data={comment} onDelete={handleDelete} />
           </li>
         );
       })}
