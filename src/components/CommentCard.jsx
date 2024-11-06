@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { normalizeDate } from "../utils/normalizeDate";
 import Votes from "./Votes";
+import DeleteCardButton from "./DeleteCardButton";
+import { UserContext } from "../contexts/UserContext";
 
-const CommentCard = ({ data }) => {
+const CommentCard = ({ data, onDelete }) => {
   const { comment_id, author, created_at, body, votes } = data;
+  const { userCtx } = useContext(UserContext);
 
   return (
     <div className="comment-card card content-wrapper">
@@ -15,7 +18,9 @@ const CommentCard = ({ data }) => {
       </header>
       <div>{body}</div>
       <footer>
-        <button>TODO Delete</button>
+        {userCtx === author && (
+          <DeleteCardButton commentId={comment_id} onDelete={onDelete} />
+        )}
         <Votes defaultValue={votes} type="comment" typeId={comment_id} />
       </footer>
     </div>

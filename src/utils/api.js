@@ -23,3 +23,8 @@ export const postComment = (id, { username, body }) =>
   api
     .post(`/articles/${id}/comments`, { username, body })
     .then((res) => res.data);
+
+export const deleteComment = (id) => api.delete(`/comments/${id}`);
+
+export const getUserByUsername = (username) =>
+  api.get(`/users/${username}`).then((res) => res.data);

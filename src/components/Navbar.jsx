@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import TopicsDropdownButton from "./TopicsDropdownButton";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 const Navbar = () => {
+  const { userCtx, setUserCtx } = useContext(UserContext);
+
   return (
     <nav className="main-navbar">
       <Link to="/" className="logo">
@@ -9,8 +13,18 @@ const Navbar = () => {
       </Link>
       <menu>
         <TopicsDropdownButton />
-        <Link to="/login">Login</Link>
-        <Link to="/logout">Logout</Link>
+        {userCtx ? (
+          <button
+            onClick={() => {
+              sessionStorage.clear();
+              setUserCtx(null);
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </menu>
     </nav>
   );
