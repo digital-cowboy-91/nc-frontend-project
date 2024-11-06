@@ -13,7 +13,7 @@ const DeleteCardButton = ({ commentId, onDelete }) => {
       .finally(() => setIsProcessing(false));
   }
 
-  if (isProcessing) return <Loader style={{ scale: "0.5" }} />;
+  if (isProcessing) return <Loader />;
 
   return <button onClick={handleDelete}>Delete</button>;
 };
