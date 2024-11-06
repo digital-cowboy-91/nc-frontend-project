@@ -12,7 +12,8 @@ const Navbar = () => {
         NC News
       </Link>
       <menu>
-        <TopicsDropdownButton />
+        {/* <TopicsDropdownButton /> */}
+        <Link to="/topics">Topics</Link>
         {userCtx ? (
           <button
             onClick={() => {
