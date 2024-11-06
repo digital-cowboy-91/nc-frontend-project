@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import { getUserByUsername } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const { setUserCtx } = useContext(UserContext);
   const navigate = useNavigate();
+  const [queries, setQueries] = useSearchParams();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ const LoginPage = () => {
         const username = data.user.username;
         sessionStorage.setItem("user", username);
         setUserCtx(username);
-        navigate("/");
+        navigate(queries.get("redirect") ?? "/");
       })
       .finally(() => setIsProcessing(false));
   }
