@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export const UserCtx = createContext({
+export const UserContext = createContext({
   userCtx: null,
   setUserCtx: () => null,
 });

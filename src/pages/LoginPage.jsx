@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { getUserByUsername } from "../utils/api";
-import { UserCtx } from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const { setUserCtx } = useContext(UserCtx);
+  const { setUserCtx } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -16,8 +16,9 @@ const LoginPage = () => {
 
     getUserByUsername(username)
       .then((data) => {
-        sessionStorage.setItem("user", data.user.username);
-        setUserCtx(data.user);
+        const username = data.user.username;
+        sessionStorage.setItem("user", username);
+        setUserCtx(username);
         navigate("/");
       })
       .finally(() => setIsProcessing(false));

@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import RootPage from "./pages/RootPage";
 import SingleArticlePage from "./pages/SingleArticlePage";
 import LoginPage from "./pages/LoginPage";
-import { UserCtx } from "./contexts/UserContext";
+import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import { getUserByUsername } from "./utils/api";
 
@@ -21,7 +21,7 @@ export default function App() {
   }, []);
 
   return (
-    <UserCtx.Provider value={{ userCtx: user, setUserCtx: setUser }}>
+    <UserContext.Provider value={{ userCtx: user, setUserCtx: setUser }}>
       <div className="main-layout">
         <Navbar />
         <div className="page-wrapper layout-wrapper">
@@ -35,6 +35,6 @@ export default function App() {
           </Routes>
         </div>
       </div>
-    </UserCtx.Provider>
+    </UserContext.Provider>
   );
 }
