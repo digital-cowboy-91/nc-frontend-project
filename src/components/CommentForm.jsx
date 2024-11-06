@@ -13,7 +13,10 @@ const CommentForm = ({ articleId, onResponse }) => {
       username: "grumpy19",
       body: bodyInput,
     })
-      .then((data) => onResponse(data.comment))
+      .then((data) => {
+        setBodyInput("");
+        onResponse(data.comment);
+      })
       .finally(() => setIsPosting(false));
   }
 
