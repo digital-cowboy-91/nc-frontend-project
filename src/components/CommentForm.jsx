@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { postComment } from "../utils/api";
+import { UserContext } from "../contexts/UserContext";
 
 const CommentForm = ({ articleId, onResponse }) => {
   const [isPosting, setIsPosting] = useState(false);
   const [bodyInput, setBodyInput] = useState("");
+  const { userCtx } = useContext(UserContext);
 
   function handleSubmit(e) {
-    setIsPosting(true);
     e.preventDefault();
 
+    if (!userCtx) return;
+
+    setIsPosting(true);
+
     postComment(articleId, {
-      username: "grumpy19",
+      username: userCtx,
       body: bodyInput,
     })
       .then((data) => {
