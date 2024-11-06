@@ -370,3 +370,16 @@ hr {
     }
   }
 }
+
+.error-card {
+  margin: auto;
+  text-align: center;
+
+  .message {
+    font-size: 1.2rem;
+  }
+
+  .details {
+    font-size: 0.8rem;
+  }
+}
