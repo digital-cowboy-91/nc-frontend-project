@@ -27,7 +27,7 @@ const CommentForm = ({ articleId, onResponse }) => {
         onChange={(e) => setBodyInput(e.target.value)}
       />
       <footer>
-        <button disabled={isPosting}>Send</button>
+        <button disabled={isPosting || bodyInput.length < 3}>Send</button>
       </footer>
     </form>
   );
