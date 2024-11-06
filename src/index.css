@@ -9,6 +9,7 @@
   --spacing-m: 2rem;
   --padding: 1rem;
   --radius: 1rem;
+  --shadow: 0 5px 10px #bebebebe;
 }
 
 body {
@@ -306,5 +307,64 @@ hr {
   58%,
   100% {
     transform: rotate(calc(var(--s, 1) * 1turn));
+  }
+}
+
+.topics-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+
+  li {
+    flex-grow: 1;
+  }
+
+  li > a {
+    min-width: 300px;
+    height: 100px;
+    position: relative;
+    display: grid;
+    place-content: center;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background-color: var(--light-color);
+    border: solid 1px var(--subtle-color);
+
+    &,
+    span,
+    .overlay {
+      transition: all 200ms ease-in-out;
+    }
+
+    span {
+      font-size: 2rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.1rem;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      font-weight: 700;
+      opacity: 0;
+      color: var(--background-color);
+      background-color: var(--foreground-color);
+    }
+
+    &:hover {
+      /* scale: 1.01;
+      box-shadow: var(--shadow); */
+
+      span {
+        opacity: 0;
+      }
+
+      .overlay {
+        opacity: 1;
+      }
+    }
   }
 }
