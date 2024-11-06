@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
-import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 
 const ArticleList = ({ queries }) => {
@@ -9,10 +9,12 @@ const ArticleList = ({ queries }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
     getArticles(queries)
       .then((data) => setArticles(data.articles))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [queries]);
 
   if (isLoading) return <Spinner />;
 
