@@ -3,8 +3,8 @@
   --background-color: #fbfbfb;
   --subtle-color: #d7d7d7;
   --light-color: #ffffff;
-  --positive-color: #d94e4e;
-  --negative-color: #6161e2;
+  --red-color: #d94e4e;
+  --blue-color: #6161e2;
   --spacing: 1rem;
   --spacing-m: 2rem;
   --padding: 1rem;
@@ -113,7 +113,7 @@ hr {
   font-weight: 700;
   color: var(--light-color);
 
-  background-color: var(--positive-color);
+  background-color: var(--red-color);
 
   svg {
     width: 100%;
@@ -247,11 +247,11 @@ hr {
   }
 
   &.positive {
-    background-color: var(--positive-color);
+    background-color: var(--red-color);
   }
 
   &.negative {
-    background-color: var(--negative-color);
+    background-color: var(--blue-color);
   }
 }
 
@@ -382,4 +382,45 @@ hr {
   .details {
     font-size: 0.8rem;
   }
+}
+
+/* .btn {
+  background-color: var(--foreground-color)
+  color: var(--bac)
+} */
+
+.login-form {
+  margin: auto;
+  width: 300px;
+
+  h1 {
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .error {
+    font-weight: 700;
+    color: var(--red-color);
+    margin: 0;
+  }
+
+  footer {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.code-info {
+  --color: var(--blue-color);
+  margin: auto;
+  border: solid 3px var(--color);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  color: var(--color);
+  background-color: hsl(from var(--color) h s l / 0.1);
+  text-wrap: wrap;
+  line-height: 1.2rem;
 }

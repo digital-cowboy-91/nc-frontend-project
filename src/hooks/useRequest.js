@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useResolvedPath } from "react-router-dom";
 
-export function useRequest(apiCallback, { defaultData, defaultIsProcessing }) {
-  const [data, setData] = useState(defaultData ?? null);
-  const [isProcessing, setIsProcessing] = useState(
-    defaultIsProcessing ?? false
-  );
+const defaultConfig = {
+  defaultData: null,
+  defaultIsProcessing: false,
+};
+
+export function useRequest(
+  apiCallback,
+  { defaultData, defaultIsProcessing } = defaultConfig
+) {
+  const [data, setData] = useState(defaultData);
+  const [isProcessing, setIsProcessing] = useState(defaultIsProcessing);
   const [error, setError] = useState(null);
   const { pathname } = useResolvedPath();
 
