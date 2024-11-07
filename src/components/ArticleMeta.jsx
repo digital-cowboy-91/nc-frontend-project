@@ -9,7 +9,8 @@ const ArticleMeta = ({ article, interactive }) => {
   return (
     <summary className="article-meta">
       <div className="details">
-        Published {normalizeDate(created_at)} by {author}
+        Published on <strong>{normalizeDate(created_at)}</strong> by{" "}
+        <strong>{author}</strong>
       </div>
       {interactive ? (
         <Votes defaultValue={votes} type="article" typeId={article_id} />

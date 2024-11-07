@@ -26,6 +26,7 @@ const LoginPage = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!username) return;
     invoke(username);
   }
 
@@ -41,7 +42,7 @@ const LoginPage = () => {
       />
       {error && <p className="error">{error.message}</p>}
       <footer>
-        <Button className="btn" disabled={isProcessing}>
+        <Button className="btn" disabled={isProcessing || !username}>
           Login
         </Button>
       </footer>

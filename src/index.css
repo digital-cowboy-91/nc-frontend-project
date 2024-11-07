@@ -118,6 +118,10 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .details {
+    font-size: 0.9rem;
+  }
 }
 
 .vote-stat {
@@ -426,11 +430,10 @@ select {
   }
 
   &:disabled {
-    --color: var(--subtle);
+    --default-color: var(--subtle);
 
     cursor: unset;
     background-color: var(--default-color);
-    border: solid 1px var(--default-color);
   }
 }
 
