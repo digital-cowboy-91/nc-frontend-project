@@ -1,44 +1,52 @@
-import React, { useContext, useState } from "react";
-import { getUserByUsername } from "../utils/api";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useRequest } from "../hooks/useRequest";
+import { getUserByUsername } from "../utils/api";
+import UserList from "../components/UserList";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
   const { setUserCtx } = useContext(UserContext);
+  const [queries] = useSearchParams();
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const [queries, setQueries] = useSearchParams();
+
+  const { data, isProcessing, error, invoke } = useRequest(getUserByUsername);
+
+  useEffect(() => {
+    const resUsername = data?.user?.username;
+
+    if (!resUsername) return;
+
+    sessionStorage.setItem("user", resUsername);
+    setUserCtx(resUsername);
+    navigate(queries.get("redirect") ?? "/");
+  }, [data]);
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    setIsProcessing(true);
-
-    getUserByUsername(username)
-      .then((data) => {
-        const username = data.user.username;
-        sessionStorage.setItem("user", username);
-        setUserCtx(username);
-        navigate(queries.get("redirect") ?? "/");
-      })
-      .finally(() => setIsProcessing(false));
+    invoke(username);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          disabled={isProcessing}
-        />
+    <>
+      <form onSubmit={handleSubmit} className="login-form card content-wrapper">
+        <h1>LOGIN</h1>
+        <UserList />
+        <label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            disabled={isProcessing}
+          />
+        </label>
+        {error && <p className="error">{error.message}</p>}
         <footer>
           <button disabled={isProcessing}>Login</button>
         </footer>
-      </label>
-    </form>
+      </form>
+    </>
   );
 };
 
