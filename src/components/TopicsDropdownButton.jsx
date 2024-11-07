@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { getTopics } from "../utils/api";
 import { Link } from "react-router-dom";
+import Loader from "./Loader";
 
 const TopicsDropdownButton = () => {
   const [topics, setTopics] = useState([]);
-  const [loadingTopics, setLoadingTopics] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [showItems, setShowItems] = useState(false);
 
   useEffect(() => {
     getTopics()
       .then((data) => setTopics(data.topics))
-      .finally(() => setLoadingTopics(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
-  return loadingTopics ? (
-    <div>Todo Spinner</div>
-  ) : (
+  if (isLoading) return <Loader />;
+
+  return (
     Boolean(topics?.length) && (
       <div className="dropdown-button ">
         <button onClick={() => setShowItems((prev) => !prev)}>Topics</button>

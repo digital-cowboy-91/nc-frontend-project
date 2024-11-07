@@ -6,6 +6,9 @@ import LoginPage from "./pages/LoginPage";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import { getUserByUsername } from "./utils/api";
+import TopicPage from "./pages/TopicPage";
+import SingleTopicPage from "./pages/SingleTopicPage";
+import ErrorCard from "./components/ErrorCard";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -32,6 +35,9 @@ export default function App() {
               element={<SingleArticlePage />}
             />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/topics" element={<TopicPage />} />
+            <Route path="/topics/:slug" element={<SingleTopicPage />} />
+            <Route path="*" element={<ErrorCard defaultStatus={404} />} />
           </Routes>
         </div>
       </div>

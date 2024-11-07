@@ -6,23 +6,27 @@ import CommentList from "../components/CommentList";
 import Spinner from "../components/Spinner";
 import CommentForm from "../components/CommentForm";
 import { UserContext } from "../contexts/UserContext";
+import { useRequest } from "../hooks/useRequest";
+import ErrorCard from "../components/ErrorCard";
 
 const SingleArticlePage = () => {
   const { article_id } = useParams();
-  const [article, setArticle] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [injectComment, setInjectComment] = useState();
   const { userCtx } = useContext(UserContext);
   const path = useResolvedPath();
 
+  const { data, isProcessing, error, invoke } = useRequest(getArticleById, {
+    defaultIsProcessing: true,
+  });
+
   useEffect(() => {
-    getArticleById(article_id)
-      .then((data) => setArticle(data.article))
-      .finally(() => setIsLoading(false));
+    invoke(article_id);
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isProcessing) return <Spinner />;
+  if (error) return <ErrorCard error={error} />;
 
+  const { article } = data;
   const { article_img_url, title, body } = article;
 
   return (

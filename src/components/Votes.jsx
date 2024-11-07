@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IconLike } from "./icons/IconLike";
 import { IconArrow } from "./icons/IconArrow";
 import { patchArticle, patchComment } from "../utils/api";
+import { UserContext } from "../contexts/UserContext";
+import { useNavigate, useResolvedPath } from "react-router-dom";
 
 const Votes = ({ defaultValue, type, typeId }) => {
   const localKeyName = `vote-${type}-${typeId}`;
@@ -12,7 +14,17 @@ const Votes = ({ defaultValue, type, typeId }) => {
   );
   const [isVoting, setIsVoting] = useState(false);
 
+  const { userCtx } = useContext(UserContext);
+  const navigate = useNavigate();
+  const path = useResolvedPath();
+
+  function handleRedirect() {
+    navigate(`/login?redirect=${path.pathname}`);
+  }
+
   function handleUpdateVote(num) {
+    if (!userCtx) return handleRedirect();
+
     setIsVoting(true);
 
     let voteValue;

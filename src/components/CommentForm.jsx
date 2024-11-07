@@ -1,19 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { postComment } from "../utils/api";
+import { UserContext } from "../contexts/UserContext";
 
 const CommentForm = ({ articleId, onResponse }) => {
   const [isPosting, setIsPosting] = useState(false);
   const [bodyInput, setBodyInput] = useState("");
+  const { userCtx } = useContext(UserContext);
 
   function handleSubmit(e) {
-    setIsPosting(true);
     e.preventDefault();
 
+    if (!userCtx || bodyInput.length < 3) return;
+
+    setIsPosting(true);
+
     postComment(articleId, {
-      username: "grumpy19",
+      username: userCtx,
       body: bodyInput,
     })
-      .then((data) => onResponse(data.comment))
+      .then((data) => {
+        setBodyInput("");
+        onResponse(data.comment);
+      })
       .finally(() => setIsPosting(false));
   }
 
@@ -27,7 +35,7 @@ const CommentForm = ({ articleId, onResponse }) => {
         onChange={(e) => setBodyInput(e.target.value)}
       />
       <footer>
-        <button disabled={isPosting}>Send</button>
+        <button disabled={isPosting || bodyInput.length < 3}>Send</button>
       </footer>
     </form>
   );
