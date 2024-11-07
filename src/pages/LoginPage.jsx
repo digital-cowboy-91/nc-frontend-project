@@ -30,26 +30,22 @@ const LoginPage = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="login-form card content-wrapper">
-        <h1>LOGIN</h1>
-        <UserList />
-        <label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            disabled={isProcessing}
-          />
-        </label>
-        {error && <p className="error">{error.message}</p>}
-        <footer>
-          <Button className="btn" disabled={isProcessing}>
-            Login
-          </Button>
-        </footer>
-      </form>
-    </>
+    <form onSubmit={handleSubmit} className="login-form card content-wrapper">
+      <h1>LOGIN</h1>
+      <UserList />
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        disabled={isProcessing}
+      />
+      {error && <p className="error">{error.message}</p>}
+      <footer>
+        <Button className="btn" disabled={isProcessing}>
+          Login
+        </Button>
+      </footer>
+    </form>
   );
 };
 
