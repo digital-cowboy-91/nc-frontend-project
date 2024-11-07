@@ -3,20 +3,26 @@ import { Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import Spinner from "./Spinner";
+import { useRequest } from "../hooks/useRequest";
 
-const ArticleList = ({ queries }) => {
-  const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const ArticleList = ({ queries, onError }) => {
+  const { data, isProcessing, error, invoke } = useRequest(getArticles, {
+    defaultIsProcessing: true,
+  });
 
   useEffect(() => {
-    setIsLoading(true);
+    if (error) {
+      onError(error);
+      return;
+    }
 
-    getArticles(queries)
-      .then((data) => setArticles(data.articles))
-      .finally(() => setIsLoading(false));
-  }, [queries]);
+    invoke(queries);
+  }, [queries, error]);
 
-  if (isLoading) return <Spinner />;
+  if (isProcessing) return <Spinner />;
+  if (error) return;
+
+  const { articles } = data;
 
   return (
     <ul>

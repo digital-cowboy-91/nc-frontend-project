@@ -10,7 +10,7 @@ const CommentForm = ({ articleId, onResponse }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!userCtx) return;
+    if (!userCtx || bodyInput.length < 3) return;
 
     setIsPosting(true);
 
