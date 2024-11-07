@@ -7,6 +7,8 @@ const SortBar = ({ onUpdateQuery }) => {
   const [sortBy, setSortBy] = useState(queries.get("sort_by") ?? "");
   const [orderBy, setOrderBy] = useState(queries.get("order") ?? "");
 
+  const [showTab, setShowTab] = useState(null);
+
   useEffect(() => {
     const map = new Map();
 
@@ -27,34 +29,62 @@ const SortBar = ({ onUpdateQuery }) => {
     onUpdateQuery(newQueries);
   }, [sortBy, orderBy]);
 
+  function handleStateChange(newVal, callback) {
+    callback((prevVal) => (prevVal === newVal ? null : newVal));
+  }
+
   return (
     <div className="sort-bar">
-      <label htmlFor="query-sort-by">
-        Sort by
-        <select
-          id="query-sort-by"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
+      <header className={showTab ? "expand" : ""}>
+        <button
+          className={`tab ${showTab === 1 ? "active" : ""}`}
+          onClick={() => handleStateChange(1, setShowTab)}
         >
-          <option value=""></option>
-          <option value="author">Author</option>
-          <option value="title">Title</option>
-          <option value="created_at">Date</option>
-          <option value="votes">Votes</option>
-        </select>
-      </label>
-      <label htmlFor="query-order">
-        Order by
-        <select
-          id="query-order"
-          value={orderBy}
-          onChange={(e) => setOrderBy(e.target.value)}
+          Sort By
+        </button>
+        <button
+          className={`tab ${showTab === 2 ? "active" : ""}`}
+          onClick={() => handleStateChange(2, setShowTab)}
         >
-          <option value=""></option>
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
-        </select>
-      </label>
+          Order
+        </button>
+      </header>
+      {showTab === 1 && (
+        <ul>
+          {[
+            ["author", "Author"],
+            ["title", "Title"],
+            ["created_at", "Date"],
+            ["votes", "Votes"],
+          ].map(([value, title]) => (
+            <li key={value} value={value}>
+              <button
+                className={sortBy === value ? "active" : ""}
+                onClick={() => handleStateChange(value, setSortBy)}
+              >
+                {title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {showTab === 2 && (
+        <ul>
+          {[
+            ["asc", "Ascending"],
+            ["desc", "Descending"],
+          ].map(([value, title]) => (
+            <li key={value} value={value}>
+              <button
+                className={orderBy === value ? "active" : ""}
+                onClick={() => handleStateChange(value, setOrderBy)}
+              >
+                {title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
