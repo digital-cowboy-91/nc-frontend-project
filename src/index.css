@@ -382,12 +382,37 @@ hr {
   .details {
     font-size: 0.8rem;
   }
+
+  footer {
+    display: flex;
+    gap: var(--spacing);
+  }
 }
 
-/* .btn {
-  background-color: var(--foreground-color)
-  color: var(--bac)
-} */
+.btn {
+  --color: var(--foreground-color);
+
+  background-color: hsl(from var(--color) h s calc(l * 1.5));
+  color: var(--light-color);
+  font-weight: 700;
+  padding: calc(var(--padding) / 2) var(--padding);
+  border-radius: 0.5rem;
+  transition: all 200ms ease-in-out;
+  border: solid 1px var(--color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color);
+  }
+
+  &:disabled {
+    --color: var(--subtle-color);
+
+    cursor: unset;
+    background-color: var(--color);
+    border: solid 1px var(--color);
+  }
+}
 
 .login-form {
   margin: auto;

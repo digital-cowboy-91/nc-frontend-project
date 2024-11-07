@@ -8,6 +8,7 @@ import CommentForm from "../components/CommentForm";
 import { UserContext } from "../contexts/UserContext";
 import { useRequest } from "../hooks/useRequest";
 import ErrorCard from "../components/ErrorCard";
+import CustomButton from "../components/CustomButton";
 
 const SingleArticlePage = () => {
   const { article_id } = useParams();
@@ -49,9 +50,13 @@ const SingleArticlePage = () => {
           onResponse={(comment) => setInjectComment(comment)}
         />
       ) : (
-        <Link to={`/login?redirect=${path.pathname}`}>
+        <CustomButton
+          as="link"
+          to={`/login?redirect=${path.pathname}`}
+          style={{ margin: "auto" }}
+        >
           Login first to comment
-        </Link>
+        </CustomButton>
       )}
       <CommentList articleId={article_id} injectThis={injectComment} />
     </>

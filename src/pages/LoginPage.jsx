@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import { useRequest } from "../hooks/useRequest";
 import { getUserByUsername } from "../utils/api";
 import UserList from "../components/UserList";
+import Button from "../components/CustomButton";
 
 const LoginPage = () => {
   const { setUserCtx } = useContext(UserContext);
@@ -43,7 +44,9 @@ const LoginPage = () => {
         </label>
         {error && <p className="error">{error.message}</p>}
         <footer>
-          <button disabled={isProcessing}>Login</button>
+          <Button className="btn" disabled={isProcessing}>
+            Login
+          </Button>
         </footer>
       </form>
     </>

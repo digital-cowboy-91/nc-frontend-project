@@ -1,30 +1,35 @@
-import { Link } from "react-router-dom";
-import TopicsDropdownButton from "./TopicsDropdownButton";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import Button from "./CustomButton";
+import CustomButton from "./CustomButton";
 
 const Navbar = () => {
   const { userCtx, setUserCtx } = useContext(UserContext);
 
   return (
     <nav className="main-navbar">
-      <Link to="/" className="logo">
+      <CustomButton as="link" to="/" className="logo">
         NC News
-      </Link>
+      </CustomButton>
       <menu>
         {/* <TopicsDropdownButton /> */}
-        <Link to="/topics">Topics</Link>
+        <CustomButton as="link" to="/topics">
+          Topics
+        </CustomButton>
         {userCtx ? (
-          <button
+          <CustomButton
             onClick={() => {
               sessionStorage.clear();
               setUserCtx(null);
             }}
           >
             Logout
-          </button>
+          </CustomButton>
         ) : (
-          <Link to="/login">Login</Link>
+          <CustomButton as="link" to="/login">
+            Login
+          </CustomButton>
         )}
       </menu>
     </nav>

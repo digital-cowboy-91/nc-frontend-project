@@ -1,6 +1,6 @@
 import React from "react";
 import { defaultStatusObjects } from "../utils/defaultStatusObjects";
-import { Link } from "react-router-dom";
+import CustomButton from "./CustomButton";
 
 const ErrorCard = ({ defaultStatus, error }) => {
   const { status, message, path } = defaultStatus
@@ -17,8 +17,12 @@ const ErrorCard = ({ defaultStatus, error }) => {
         </p>
       )}
       <footer>
-        <Link to={-1}>Return</Link>
-        <Link to="/">Go to Home page</Link>
+        <CustomButton as="link" to={-1}>
+          Return
+        </CustomButton>
+        <CustomButton as="link" to="/">
+          Go to Home page
+        </CustomButton>
       </footer>
     </article>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Loader from "./Loader";
 import { deleteComment } from "../utils/api";
+import CustomButton from "./CustomButton";
 
 const DeleteCardButton = ({ commentId, onDelete }) => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -15,7 +16,7 @@ const DeleteCardButton = ({ commentId, onDelete }) => {
 
   if (isProcessing) return <Loader />;
 
-  return <button onClick={handleDelete}>Delete</button>;
+  return <CustomButton onClick={handleDelete}>Delete</CustomButton>;
 };
 
 export default DeleteCardButton;

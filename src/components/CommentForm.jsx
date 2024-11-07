@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { postComment } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
+import CustomButton from "./CustomButton";
 
 const CommentForm = ({ articleId, onResponse }) => {
   const [isPosting, setIsPosting] = useState(false);
@@ -35,7 +36,9 @@ const CommentForm = ({ articleId, onResponse }) => {
         onChange={(e) => setBodyInput(e.target.value)}
       />
       <footer>
-        <button disabled={isPosting || bodyInput.length < 3}>Send</button>
+        <CustomButton disabled={isPosting || bodyInput.length < 3}>
+          Send
+        </CustomButton>
       </footer>
     </form>
   );
