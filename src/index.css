@@ -1,20 +1,19 @@
 :root {
-  --foreground: #3b3b3b;
-  --background: #fbfbfb;
+  --foreground: #1d181e;
+  --background: #f6f0fa;
   --light: #ffffff;
   --subtle: #d7d7d7;
 
-  --neutral: var(--foreground);
-  --neutral-subtle: hsl(from var(--neutral) h s calc(l * 1.5));
+  --primary: var(--foreground);
+  --primary-subtle: hsl(from var(--primary) h s calc(l * 2.5));
 
-  --primary: #609656;
-  --primary-subtle: hsl(from var(--primary) h s calc(l * 1.3));
+  --secondary: #279e89;
+  --secondary-subtle: hsl(from var(--secondary) h s calc(l * 1.3));
 
-  --secondary: #a061b0;
-  --secondary-subtle: hsl(from var(--secondary) h s calc(l * 1.5));
+  --tertiary: #dc1830;
+  --tertiary-subtle: hsl(from var(--tertiary) h s calc(l * 1.9));
 
-  --minor: #7373dd;
-
+  --highlight: #7373dd;
   --danger: #ac3737;
 
   --spacing-s: 0.5rem;
@@ -26,9 +25,17 @@
   --shadow: 0 5px 10px #bebebebe;
 }
 
+html {
+  /* This fixes horizontal jumps while loading data */
+  margin-left: calc(100vw - 100%);
+  margin-right: 0;
+}
+
 body {
   background-color: var(--background);
-  font-family: system-ui;
+  /* font-family: system-ui; */
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
   color: var(--foreground);
 }
 
@@ -63,7 +70,7 @@ textarea {
 
   &:focus {
     scale: 1.02;
-    outline: solid 1px var(--secondary);
+    outline: solid 1px var(--highlight);
     box-shadow: var(--shadow);
   }
 
@@ -136,7 +143,7 @@ select {
   font-weight: 700;
   color: var(--light);
 
-  background-color: var(--primary);
+  background-color: var(--secondary);
 
   svg {
     width: 100%;
@@ -149,6 +156,10 @@ select {
   align-items: center;
   border-radius: 1rem;
 
+  button {
+    cursor: pointer;
+  }
+
   &.positive,
   &.negative {
     color: var(--light);
@@ -159,7 +170,7 @@ select {
   }
 
   &.positive {
-    background-color: var(--primary);
+    background-color: var(--secondary);
   }
 
   &.negative {
@@ -211,7 +222,7 @@ select {
   height: 56px;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-bottom-color: var(--secondary);
+  border-bottom-color: var(--tertiary);
 }
 
 @keyframes rotation {
@@ -349,7 +360,7 @@ select {
     place-content: center;
     overflow: hidden;
     border-radius: var(--radius-m);
-    background-color: var(--light);
+    background-color: var(--secondary-subtle);
     border: solid 1px var(--subtle);
 
     &,
@@ -372,8 +383,8 @@ select {
       place-content: center;
       font-weight: 700;
       opacity: 0;
-      color: var(--background);
-      background-color: var(--foreground);
+      /* color: var(--light); */
+      background-color: var(--secondary);
       font-size: 1.5rem;
       text-align: center;
     }
@@ -412,13 +423,15 @@ select {
 }
 
 .btn {
-  --default-color: var(--neutral-subtle);
-  --action-color: var(--neutral);
+  --default-color: var(--primary-subtle);
+  --action-color: var(--primary);
   --font-color: var(--light);
 
   background-color: var(--default-color);
   color: var(--font-color);
-  font-weight: 700;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
   padding: calc(var(--padding) / 2) var(--padding);
   border-radius: var(--radius);
   transition: all 200ms ease-in-out;
@@ -458,7 +471,7 @@ select {
 }
 
 .code-info {
-  --deafult-color: var(--primary);
+  --deafult-color: var(--secondary);
 
   margin: auto;
   border: solid 3px var(--deafult-color);
@@ -496,9 +509,9 @@ select {
   header {
     --default-color: inherit;
     --default-text: inherit;
-    --action-color: var(--primary);
-    --action-text: var(--light);
-    --state-color: var(--primary);
+    --action-color: var(--secondary-subtle);
+    --action-text: inherit;
+    --state-color: var(--secondary);
     --state-text: var(--light);
 
     height: 3rem;
@@ -518,11 +531,11 @@ select {
   }
 
   ul {
-    --default-color: var(--secondary-subtle);
+    --default-color: var(--tertiary-subtle);
     --default-text: inherit;
-    --action-color: var(--secondary);
+    --action-color: var(--tertiary);
     --action-text: var(--light);
-    --state-color: var(--secondary);
+    --state-color: var(--tertiary);
     --state-text: var(--light);
 
     margin-top: var(--spacing-s);
