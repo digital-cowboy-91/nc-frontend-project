@@ -12,22 +12,24 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  const { data, isProcessing, error, invoke } = useRequest(getUserByUsername);
-
-  useEffect(() => {
-    const resUsername = data?.user?.username;
-
-    if (!resUsername) return;
-
-    sessionStorage.setItem("user", resUsername);
-    setUserCtx(resUsername);
-    navigate(queries.get("redirect") ?? "/");
-  }, [data]);
+  const { isProcessing, error, invoke } = useRequest(getUserByUsername);
 
   function handleSubmit(e) {
     e.preventDefault();
+
     if (!username) return;
-    invoke(username);
+
+    invoke({
+      withArgs: [username],
+      onSuccess: (res) => {
+        const resUsername = res.user.username;
+
+        sessionStorage.setItem("user", resUsername);
+        setUserCtx(resUsername);
+
+        navigate(queries.get("redirect") ?? "/");
+      },
+    });
   }
 
   return (

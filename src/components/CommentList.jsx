@@ -11,7 +11,7 @@ const CommentList = ({ articleId, injectThis }) => {
   );
 
   useEffect(() => {
-    invoke(articleId);
+    invoke({ withArgs: [articleId] });
   }, []);
 
   useEffect(() => {

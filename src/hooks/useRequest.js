@@ -15,14 +15,22 @@ export function useRequest(
   const [error, setError] = useState(null);
   const { pathname } = useResolvedPath();
 
-  function invoke(...params) {
+  function invoke({
+    withArgs = [],
+    onSuccess = (res) => res,
+    onError = (res) => res,
+  }) {
     setIsProcessing(true);
 
-    return apiCallback(...params)
+    return apiCallback(...withArgs)
+      .then(onSuccess)
       .then((res) => setData(res))
-      .catch(({ status, response }) =>
-        setError({ status, message: response.data.msg, path: pathname })
-      )
+      .catch((err) => {
+        const { status, response } = err;
+
+        onError(err);
+        setError({ status, message: response.data.msg, path: pathname });
+      })
       .finally(() => setIsProcessing(false));
   }
 

@@ -8,7 +8,7 @@ const DeleteCardButton = ({ commentId, onDelete }) => {
   const { isProcessing, invoke } = useRequest(deleteComment);
 
   function handleDelete() {
-    invoke(commentId).then(() => onDelete(commentId));
+    invoke({ withArgs: [commentId], onSuccess: () => onDelete(commentId) });
   }
 
   if (isProcessing) return <Loader />;

@@ -8,23 +8,25 @@ const CommentForm = ({ articleId, onResponse }) => {
   const { userCtx } = useContext(UserContext);
   const [bodyInput, setBodyInput] = useState("");
 
-  const { data, isProcessing, invoke } = useRequest(postComment);
-
-  useEffect(() => {
-    if (!data) return;
-
-    setBodyInput("");
-    onResponse(data.comment);
-  }, [data]);
+  const { isProcessing, invoke } = useRequest(postComment);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!userCtx || bodyInput.length < 3) return;
 
-    invoke(articleId, {
-      username: userCtx,
-      body: bodyInput,
+    invoke({
+      withArgs: [
+        articleId,
+        {
+          username: userCtx,
+          body: bodyInput,
+        },
+      ],
+      onSuccess: (res) => {
+        setBodyInput("");
+        onResponse(res.comment);
+      },
     });
   }
 
