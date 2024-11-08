@@ -2,28 +2,30 @@ import React, { useContext, useEffect, useState } from "react";
 import { postComment } from "../utils/api";
 import { UserContext } from "../contexts/UserContext";
 import CustomButton from "./CustomButton";
+import { useRequest } from "../hooks/useRequest";
 
 const CommentForm = ({ articleId, onResponse }) => {
-  const [isPosting, setIsPosting] = useState(false);
-  const [bodyInput, setBodyInput] = useState("");
   const { userCtx } = useContext(UserContext);
+  const [bodyInput, setBodyInput] = useState("");
+
+  const { data, isProcessing, invoke } = useRequest(postComment);
+
+  useEffect(() => {
+    if (!data) return;
+
+    setBodyInput("");
+    onResponse(data.comment);
+  }, [data]);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!userCtx || bodyInput.length < 3) return;
 
-    setIsPosting(true);
-
-    postComment(articleId, {
+    invoke(articleId, {
       username: userCtx,
       body: bodyInput,
-    })
-      .then((data) => {
-        setBodyInput("");
-        onResponse(data.comment);
-      })
-      .finally(() => setIsPosting(false));
+    });
   }
 
   return (
@@ -31,12 +33,12 @@ const CommentForm = ({ articleId, onResponse }) => {
       <textarea
         placeholder="Type your comment..."
         rows="5"
-        disabled={isPosting}
+        disabled={isProcessing}
         value={bodyInput}
         onChange={(e) => setBodyInput(e.target.value)}
       />
       <footer>
-        <CustomButton disabled={isPosting || bodyInput.length < 3}>
+        <CustomButton disabled={isProcessing || bodyInput.length < 3}>
           Send
         </CustomButton>
       </footer>
