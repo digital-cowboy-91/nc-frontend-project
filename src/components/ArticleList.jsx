@@ -25,18 +25,20 @@ const ArticleList = ({ queries, onError }) => {
   const { articles } = data;
 
   return (
-    <ul>
-      {articles.map((article) => {
-        const { article_id } = article;
-        return (
-          <li key={article_id}>
-            <Link to={`/article/${article_id}`}>
-              <ArticleCard article={article} />
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <ul className="article-list">
+        {articles.map((article) => {
+          const { article_id } = article;
+          return (
+            <li key={article_id}>
+              <Link to={`/article/${article_id}`}>
+                <ArticleCard article={article} />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 };
 
