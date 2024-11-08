@@ -103,11 +103,16 @@ select {
   }
 }
 
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+
 .article-card {
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
-  margin-bottom: var(--spacing-m);
   transition: all 200ms;
 
   title {

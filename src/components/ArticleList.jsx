@@ -35,7 +35,7 @@ const ArticleList = ({ onError, readSearchQueries }) => {
 
   return (
     <>
-      <ul>
+      <ul className="article-list">
         {articles.map((article) => {
           const { article_id } = article;
           return (
