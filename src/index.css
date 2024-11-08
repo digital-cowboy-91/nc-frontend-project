@@ -547,3 +547,58 @@ select {
     }
   }
 }
+
+.pagination {
+  --size: 3rem;
+
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing);
+
+  button {
+    --default-color: var(--light);
+    --default-text: inherit;
+    --action-color: var(--secondary-subtle);
+    --action-text: inherit;
+    --state-color: var(--secondary);
+    --state-text: var(--light);
+
+    height: var(--size);
+
+    border: none;
+    background-color: var(--default-color);
+    cursor: pointer;
+    padding: calc(var(--padding) / 2) var(--padding);
+    color: var(--default-text);
+
+    &:hover {
+      background-color: var(--action-color);
+      color: var(--action-text);
+    }
+
+    &.active {
+      background-color: var(--state-color);
+      color: var(--state-text);
+      font-weight: 700;
+    }
+
+    &:disabled {
+      background-color: var(--subtle);
+      color: var(--light);
+    }
+  }
+  & > * {
+    border-radius: var(--radius);
+  }
+
+  .pages {
+    overflow: hidden;
+    button {
+      width: var(--size);
+
+      &:not(:last-child) {
+        border-right: solid 1px var(--subtle);
+      }
+    }
+  }
+}
