@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useRequest } from "../hooks/useRequest";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import Pagination from "./Pagination";
 import Spinner from "./Spinner";
-import { useRequest } from "../hooks/useRequest";
 
-const ArticleList = ({ queries, onError }) => {
-  const { data, isProcessing, error, invoke } = useRequest(getArticles, {
+const ArticleList = ({ onError, readSearchQueries }) => {
+  const [queries] = useSearchParams();
+
+  const {
+    data: { articles, pagination },
+    isProcessing,
+    error,
+    invoke,
+  } = useRequest(getArticles, {
+    defaultData: {},
     defaultIsProcessing: true,
   });
+
+  // console.log({ articles, pagination, isProcessing, error });
 
   useEffect(() => {
     if (error) {
@@ -16,13 +27,11 @@ const ArticleList = ({ queries, onError }) => {
       return;
     }
 
-    invoke(queries);
-  }, [queries, error]);
+    invoke({ withArgs: readSearchQueries ? [queries] : [] });
+  }, [queries]);
 
   if (isProcessing) return <Spinner />;
   if (error) return;
-
-  const { articles } = data;
 
   return (
     <>
@@ -38,6 +47,7 @@ const ArticleList = ({ queries, onError }) => {
           );
         })}
       </ul>
+      <Pagination data={pagination} />
     </>
   );
 };

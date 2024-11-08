@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import Loader from "./Loader";
 import { deleteComment } from "../utils/api";
 import CustomButton from "./CustomButton";
+import { useRequest } from "../hooks/useRequest";
 
 const DeleteCardButton = ({ commentId, onDelete }) => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  const { isProcessing, invoke } = useRequest(deleteComment);
 
   function handleDelete() {
-    setIsProcessing(true);
-
-    deleteComment(commentId)
-      .then(() => onDelete(commentId))
-      .finally(() => setIsProcessing(false));
+    invoke({ withArgs: [commentId], onSuccess: () => onDelete(commentId) });
   }
 
   if (isProcessing) return <Loader />;

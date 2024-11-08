@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const SortBar = ({ onUpdateQuery }) => {
+const SortBar = () => {
   const [queries, setQueries] = useSearchParams();
 
   const [sortBy, setSortBy] = useState(queries.get("sort_by") ?? "");
@@ -26,7 +26,6 @@ const SortBar = ({ onUpdateQuery }) => {
     });
 
     setQueries(newQueries);
-    onUpdateQuery(newQueries);
   }, [sortBy, orderBy]);
 
   function handleStateChange(newVal, callback) {

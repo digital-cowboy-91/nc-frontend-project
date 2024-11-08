@@ -4,12 +4,17 @@ import { getUsers } from "../utils/api";
 import Spinner from "./Spinner";
 
 const UserList = () => {
-  const { data, isProcessing, error, invoke } = useRequest(getUsers, {
+  const {
+    data: users,
+    isProcessing,
+    error,
+    invoke,
+  } = useRequest(getUsers, {
     defaultIsProcessing: true,
   });
 
   useEffect(() => {
-    invoke();
+    invoke({ onSuccess: (res) => res.users });
   }, []);
 
   if (isProcessing) return <Spinner />;
@@ -19,7 +24,7 @@ const UserList = () => {
     <code className="code-info">
       For test purpose, you can use any of the following usernames:
       <ul>
-        {data.users.map(({ username }) => (
+        {users.map(({ username }) => (
           <li key={username}>- {username}</li>
         ))}
       </ul>

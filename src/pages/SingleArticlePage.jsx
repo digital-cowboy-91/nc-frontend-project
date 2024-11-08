@@ -16,18 +16,22 @@ const SingleArticlePage = () => {
   const { userCtx } = useContext(UserContext);
   const path = useResolvedPath();
 
-  const { data, isProcessing, error, invoke } = useRequest(getArticleById, {
+  const {
+    data: article,
+    isProcessing,
+    error,
+    invoke,
+  } = useRequest(getArticleById, {
     defaultIsProcessing: true,
   });
 
   useEffect(() => {
-    invoke(article_id);
+    invoke({ withArgs: [article_id], onSuccess: (res) => res.article });
   }, []);
 
   if (isProcessing) return <Spinner />;
   if (error) return <ErrorCard error={error} />;
 
-  const { article } = data;
   const { article_img_url, title, body } = article;
 
   return (
