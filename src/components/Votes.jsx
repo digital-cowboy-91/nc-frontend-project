@@ -1,22 +1,30 @@
-import React, { useContext, useState } from "react";
-import { IconLike } from "./icons/IconLike";
-import { IconArrow } from "./icons/IconArrow";
-import { patchArticle, patchComment } from "../utils/api";
-import { UserContext } from "../contexts/UserContext";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useResolvedPath } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
+import { useRequest } from "../hooks/useRequest";
+import { patchArticle, patchComment } from "../utils/api";
+import { IconArrow } from "./icons/IconArrow";
 
 const Votes = ({ defaultValue, type, typeId }) => {
-  const localKeyName = `vote-${type}-${typeId}`;
-
-  const [optimisticVotes, setOptimisticVotes] = useState(defaultValue ?? 0);
-  const [userVote, setUserVote] = useState(
-    Number(localStorage.getItem(localKeyName)) ?? 0
-  );
-  const [isVoting, setIsVoting] = useState(false);
-
   const { userCtx } = useContext(UserContext);
+  const [optimisticVotes, setOptimisticVotes] = useState(defaultValue ?? 0);
+
   const navigate = useNavigate();
   const path = useResolvedPath();
+
+  const localKeyName = `vote-${type}-${typeId}`;
+  const APIs = new Map([
+    ["comment", patchComment],
+    ["article", patchArticle],
+  ]);
+  const {
+    data: userVote,
+    setData: setUserVote,
+    isProcessing,
+    invoke,
+  } = useRequest(APIs.get(type), {
+    defaultData: Number(localStorage.getItem(localKeyName)) ?? 0,
+  });
 
   function handleRedirect() {
     navigate(`/login?redirect=${path.pathname}`);
@@ -24,8 +32,6 @@ const Votes = ({ defaultValue, type, typeId }) => {
 
   function handleUpdateVote(num) {
     if (!userCtx) return handleRedirect();
-
-    setIsVoting(true);
 
     let voteValue;
     let realValue = num;
@@ -43,23 +49,17 @@ const Votes = ({ defaultValue, type, typeId }) => {
     setOptimisticVotes((prevVal) => prevVal + voteValue);
     setUserVote(realValue);
 
-    let api;
-
-    if (type === "comment") api = patchComment(typeId, voteValue);
-    if (type === "article") api = patchArticle(typeId, voteValue);
-
-    if (api) {
-      api
-        .then(() => {
-          localStorage.setItem(localKeyName, realValue);
-          // return Promise.reject("cause i want");
-        })
-        .catch(() => {
-          setOptimisticVotes((prevVal) => prevVal + voteValue * -1);
-          setUserVote(prevValue);
-        })
-        .finally(() => setIsVoting(false));
-    }
+    invoke({
+      withArgs: [typeId, voteValue],
+      onSuccess: () => {
+        localStorage.setItem(localKeyName, realValue);
+        return realValue;
+      },
+      onError: () => {
+        setOptimisticVotes((prevVal) => prevVal + voteValue * -1);
+        setUserVote(prevValue);
+      },
+    });
   }
 
   return (
@@ -71,7 +71,7 @@ const Votes = ({ defaultValue, type, typeId }) => {
       <button
         className="icon-btn"
         onClick={() => handleUpdateVote(-1)}
-        disabled={isVoting}
+        disabled={isProcessing}
       >
         <IconArrow outline={userVote > 0} />
       </button>
@@ -79,7 +79,7 @@ const Votes = ({ defaultValue, type, typeId }) => {
       <button
         className="icon-btn"
         onClick={() => handleUpdateVote(1)}
-        disabled={isVoting}
+        disabled={isProcessing}
       >
         <IconArrow
           outline={userVote < 0}

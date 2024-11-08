@@ -1,33 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { getArticleComments } from "../utils/api";
 import Spinner from "./Spinner";
 import CommentCard from "./CommentCard";
+import { useRequest } from "../hooks/useRequest";
 
 const CommentList = ({ articleId, injectThis }) => {
-  const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, setData, isProcessing, error, invoke } = useRequest(
+    getArticleComments,
+    { defaultIsProcessing: true }
+  );
 
   useEffect(() => {
-    getArticleComments(articleId)
-      .then((data) => setComments(data.comments))
-      .finally(() => setIsLoading(false));
+    invoke({ withArgs: [articleId] });
   }, []);
 
   useEffect(() => {
-    setComments((prevVal) => [injectThis, ...prevVal]);
+    if (!injectThis) return;
+
+    setData((prevVal) => {
+      const newVal = structuredClone(prevVal);
+      newVal.comments = [injectThis, ...newVal.comments];
+
+      return newVal;
+    });
   }, [injectThis]);
 
   function handleDelete(idToDelete) {
-    setComments((prevVal) =>
-      prevVal.filter(({ comment_id }) => comment_id !== idToDelete)
-    );
+    setData((prevVal) => {
+      const newVal = structuredClone(prevVal);
+      newVal.comments = newVal.comments.filter(
+        ({ comment_id }) => comment_id !== idToDelete
+      );
+
+      return newVal;
+    });
   }
 
-  if (isLoading) return <Spinner />;
+  if (isProcessing) return <Spinner />;
 
   return (
     <ul className="content-wrapper">
-      {comments.map((comment) => {
+      {data.comments.map((comment) => {
         return (
           <li key={comment.comment_id}>
             <CommentCard data={comment} onDelete={handleDelete} />

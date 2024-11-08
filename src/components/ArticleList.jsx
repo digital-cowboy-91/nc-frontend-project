@@ -16,7 +16,7 @@ const ArticleList = ({ queries, onError }) => {
       return;
     }
 
-    invoke(queries);
+    invoke({ withArgs: [queries] });
   }, [queries, error]);
 
   if (isProcessing) return <Spinner />;

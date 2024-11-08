@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import { getTopics } from "../utils/api";
 import { Link } from "react-router-dom";
+import { useRequest } from "../hooks/useRequest";
 
 const TopicList = () => {
-  const [topics, setTopics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    data: topics,
+    isProcessing,
+    invoke,
+  } = useRequest(getTopics, { defaultIsProcessing: true });
 
   useEffect(() => {
-    getTopics()
-      .then((data) => setTopics(data.topics))
-      .finally(() => setIsLoading(false));
+    invoke({ onSuccess: (res) => res.topics });
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isProcessing) return <Spinner />;
 
   return (
     <ul className="topics-wrapper">
