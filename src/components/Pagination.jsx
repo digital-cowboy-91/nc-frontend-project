@@ -1,7 +1,7 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 
-const Pagination = ({ data, onPageChange, pushToQuery }) => {
+const Pagination = ({ data, onPageChange, pushToQuery = false }) => {
   const { current_page, next_page, prev_page, total_count, total_pages } = data;
 
   const [queries, setQueries] = useSearchParams();
@@ -23,7 +23,8 @@ const Pagination = ({ data, onPageChange, pushToQuery }) => {
       newQueries[key] = val;
     });
 
-    pushToQuery ?? setQueries(newQueries);
+    onPageChange && onPageChange(newQueries);
+    pushToQuery && setQueries(newQueries);
   }
 
   return (
