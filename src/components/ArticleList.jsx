@@ -47,7 +47,7 @@ const ArticleList = ({ onError, readSearchQueries }) => {
           );
         })}
       </ul>
-      <Pagination data={pagination} />
+      <Pagination data={pagination} pushToQuery />
     </>
   );
 };
