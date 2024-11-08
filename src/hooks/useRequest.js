@@ -28,6 +28,7 @@ export function useRequest(
 
   return {
     data,
+    setData,
     isProcessing,
     error,
     invoke,
