@@ -18,7 +18,7 @@ export function useRequest(
   function invoke(...params) {
     setIsProcessing(true);
 
-    apiCallback(...params)
+    return apiCallback(...params)
       .then((res) => setData(res))
       .catch(({ status, response }) =>
         setError({ status, message: response.data.msg, path: pathname })
