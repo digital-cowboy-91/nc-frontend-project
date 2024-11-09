@@ -1,0 +1,118 @@
+:root {
+  --btn-default-bg: var(--primary);
+  --btn-default-text: var(--light);
+  --btn-default-weight: 500;
+
+  --btn-hover-bg: var(--primary-subtle);
+  --btn-hover-text: var(--light);
+  --btn-hover-weight: 500;
+
+  --btn-active-bg: var(--primary);
+  --btn-active-text: var(--light);
+  --btn-active-weight: 500;
+
+  --btn-height: 2.5rem;
+  --btn-width: auto;
+
+  --btn-padding: var(--padding);
+
+  --btn-radius: var(--radius);
+
+  --btn-font-size: 1rem;
+  --btn-scale: 1;
+
+  --btn-border: none;
+}
+
+.btn {
+  & {
+    all: unset;
+  }
+
+  height: calc(var(--btn-height) * var(--btn-scale));
+  width: calc(var(--btn-width) * var(--btn-scale));
+
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
+
+  padding: calc(var(--btn-padding) / 2 * var(--btn-scale))
+    calc(var(--btn-padding) * var(--btn-scale));
+
+  border: var(--btn-border);
+
+  background-color: var(--btn-default-bg);
+  color: var(--btn-default-text);
+  font-weight: var(--btn-default-weight);
+
+  font-size: calc(var(--btn-font-size) * var(--btn-scale));
+
+  cursor: pointer;
+
+  transition: all 200ms;
+
+  &:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+    font-weight: var(--btn-hover-weight);
+  }
+
+  &.btn-active {
+    background-color: var(--btn-active-bg);
+    color: var(--btn-active-text);
+    font-weight: var(--btn-active-weight);
+  }
+
+  &:disabled {
+    background-color: var(--subtle);
+    color: var(--light);
+  }
+}
+
+.btn-secondary {
+  --btn-default-bg: var(--light);
+  --btn-default-text: var(--foreground);
+
+  --btn-hover-bg: var(--secondary-subtle);
+  --btn-hover-text: var(--foreground);
+
+  --btn-active-bg: var(--secondary);
+  --btn-active-text: var(--light);
+}
+
+.btn-tertiary {
+  --btn-default-bg: var(--tertiary-subtle);
+  --btn-default-text: var(--foreground);
+
+  --btn-hover-bg: var(--tertiary);
+  --btn-hover-text: var(--light);
+
+  --btn-active-bg: var(--tertiary);
+  --btn-active-text: var(--light);
+}
+
+.btn-square {
+  --btn-width: var(--btn-height);
+}
+
+.btn-rounded {
+  border-radius: calc(var(--btn-radius) * var(--btn-scale));
+}
+
+.btn-pill {
+  border-radius: 999px;
+}
+
+.btn-small {
+  --btn-scale: 0.8;
+}
+
+.btn-border {
+  --btn-border: var(--border);
+}
+
+.btn-scale-on-click {
+  &:active {
+    scale: 0.95;
+  }
+}

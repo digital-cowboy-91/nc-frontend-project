@@ -2,6 +2,7 @@ import React from "react";
 import { normalizeDate } from "../utils/normalizeDate";
 import Votes from "./Votes";
 import VoteStat from "./VoteStat";
+import "./ArticleMeta.style.css";
 
 const ArticleMeta = ({ article, interactive }) => {
   const { article_id, created_at, author, votes } = article;

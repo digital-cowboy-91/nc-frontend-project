@@ -23,6 +23,8 @@
   --radius: 0.5rem;
   --radius-m: 1rem;
   --shadow: 0 5px 10px #bebebebe;
+
+  --border: solid 1px var(--subtle);
 }
 
 html {
@@ -39,10 +41,10 @@ body {
   color: var(--foreground);
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+ul,
+li,
+menu {
+  all: unset;
 }
 
 a {
@@ -109,33 +111,6 @@ select {
   gap: var(--spacing);
 }
 
-.article-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing);
-  transition: all 200ms;
-
-  title {
-    font-size: 2rem;
-    margin: var(--spacing) 0;
-  }
-
-  &:hover {
-    scale: 1.01;
-    box-shadow: 0 5px 10px #bebebebe;
-  }
-}
-
-.article-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .details {
-    font-size: 0.9rem;
-  }
-}
-
 .vote-stat {
   height: 1rem;
   display: flex;
@@ -183,10 +158,12 @@ select {
   }
 }
 
-.image-wrapper {
+.hero-wrapper {
   height: 300px;
   overflow: hidden;
   border-radius: var(--radius-m);
+  background-color: var(--subtle);
+
   img {
     object-fit: cover;
     width: 100%;
@@ -428,34 +405,6 @@ select {
   }
 }
 
-.btn {
-  --default-color: var(--primary-subtle);
-  --action-color: var(--primary);
-  --font-color: var(--light);
-
-  background-color: var(--default-color);
-  color: var(--font-color);
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: calc(var(--padding) / 2) var(--padding);
-  border-radius: var(--radius);
-  transition: all 200ms ease-in-out;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--action-color);
-  }
-
-  &:disabled {
-    --default-color: var(--subtle);
-
-    cursor: unset;
-    background-color: var(--default-color);
-  }
-}
-
 .login-form {
   margin: auto;
   width: 300px;
@@ -487,123 +436,9 @@ select {
   background-color: hsl(from var(--deafult-color) h s l / 0.1);
   text-wrap: wrap;
   line-height: 1.2rem;
-}
 
-.sort-bar {
-  display: flex;
-  flex-direction: column;
-
-  button {
-    border: none;
-    background-color: var(--default-color);
-    cursor: pointer;
-    padding: calc(var(--padding) / 2) var(--padding);
-    color: var(--default-text);
-
-    &:hover {
-      background-color: var(--action-color);
-      color: var(--action-text);
-    }
-
-    &.active {
-      background-color: var(--state-color);
-      color: var(--state-text);
-      font-weight: 700;
-    }
-  }
-
-  header {
-    --default-color: inherit;
-    --default-text: inherit;
-    --action-color: var(--secondary-subtle);
-    --action-text: inherit;
-    --state-color: var(--secondary);
-    --state-text: var(--light);
-
-    height: 3rem;
-    background-color: var(--light);
-    border-radius: 1.5rem;
-    overflow: hidden;
-    border: solid 1px var(--subtle);
-
-    .tab {
-      border-right: solid 1px var(--subtle);
-    }
-  }
-
-  header,
-  ul {
-    display: flex;
-  }
-
-  ul {
-    --default-color: var(--tertiary-subtle);
-    --default-text: inherit;
-    --action-color: var(--tertiary);
-    --action-text: var(--light);
-    --state-color: var(--tertiary);
-    --state-text: var(--light);
-
-    margin-top: var(--spacing-s);
-    gap: var(--spacing-s);
-
-    button {
-      border-radius: 1.5rem;
-    }
-  }
-}
-
-.pagination {
-  --size: 3rem;
-
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing);
-
-  button {
-    --default-color: var(--light);
-    --default-text: inherit;
-    --action-color: var(--secondary-subtle);
-    --action-text: inherit;
-    --state-color: var(--secondary);
-    --state-text: var(--light);
-
-    height: var(--size);
-
-    border: none;
-    background-color: var(--default-color);
-    cursor: pointer;
-    padding: calc(var(--padding) / 2) var(--padding);
-    color: var(--default-text);
-
-    &:hover {
-      background-color: var(--action-color);
-      color: var(--action-text);
-    }
-
-    &.active {
-      background-color: var(--state-color);
-      color: var(--state-text);
-      font-weight: 700;
-    }
-
-    &:disabled {
-      background-color: var(--subtle);
-      color: var(--light);
-    }
-  }
-  & > * {
-    border-radius: var(--radius);
-  }
-
-  .pages {
-    overflow: hidden;
-    button {
-      width: var(--size);
-
-      &:not(:last-child) {
-        border-right: solid 1px var(--subtle);
-      }
-    }
+  li {
+    display: list-item;
+    list-style-type: none;
   }
 }

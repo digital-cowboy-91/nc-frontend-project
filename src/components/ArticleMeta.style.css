@@ -1,0 +1,13 @@
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  strong {
+    color: var(--secondary);
+  }
+
+  .details {
+    font-size: 0.9rem;
+  }
+}

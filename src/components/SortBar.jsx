@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import CustomButton from "./CustomButton";
+import "./SortBar.style.css";
 
 const SortBar = () => {
   const [queries, setQueries] = useSearchParams();
@@ -35,18 +37,22 @@ const SortBar = () => {
   return (
     <div className="sort-bar">
       <header className={showTab ? "expand" : ""}>
-        <button
-          className={`tab ${showTab === 1 ? "active" : ""}`}
+        <CustomButton
+          rounded={false}
+          active={showTab === 1}
+          secondary
           onClick={() => handleStateChange(1, setShowTab)}
         >
           Sort By
-        </button>
-        <button
-          className={`tab ${showTab === 2 ? "active" : ""}`}
+        </CustomButton>
+        <CustomButton
+          rounded={false}
+          active={showTab === 2}
+          secondary
           onClick={() => handleStateChange(2, setShowTab)}
         >
           Order
-        </button>
+        </CustomButton>
       </header>
       {showTab === 1 && (
         <ul>
@@ -57,12 +63,15 @@ const SortBar = () => {
             ["votes", "Votes"],
           ].map(([value, title]) => (
             <li key={value} value={value}>
-              <button
-                className={sortBy === value ? "active" : ""}
+              <CustomButton
+                tertiary
+                active={sortBy === value}
+                pill
+                small
                 onClick={() => handleStateChange(value, setSortBy)}
               >
                 {title}
-              </button>
+              </CustomButton>
             </li>
           ))}
         </ul>
@@ -74,12 +83,15 @@ const SortBar = () => {
             ["desc", "Descending"],
           ].map(([value, title]) => (
             <li key={value} value={value}>
-              <button
-                className={orderBy === value ? "active" : ""}
+              <CustomButton
+                tertiary
+                active={orderBy === value}
+                pill
+                small
                 onClick={() => handleStateChange(value, setOrderBy)}
               >
                 {title}
-              </button>
+              </CustomButton>
             </li>
           ))}
         </ul>

@@ -13,7 +13,11 @@ const DeleteCardButton = ({ commentId, onDelete }) => {
 
   if (isProcessing) return <Loader />;
 
-  return <CustomButton onClick={handleDelete}>Delete</CustomButton>;
+  return (
+    <CustomButton small onClick={handleDelete}>
+      Delete
+    </CustomButton>
+  );
 };
 
 export default DeleteCardButton;
