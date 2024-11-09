@@ -25,10 +25,6 @@
 }
 
 .btn {
-  & {
-    all: unset;
-  }
-
   height: calc(var(--btn-height) * var(--btn-scale));
   width: calc(var(--btn-width) * var(--btn-scale));
 
