@@ -462,29 +462,3 @@ select {
   text-wrap: wrap;
   line-height: 1.2rem;
 }
-
-.sort-bar {
-  &,
-  header,
-  ul {
-    display: flex;
-  }
-
-  flex-direction: column;
-
-  header {
-    background-color: var(--light);
-    border-radius: 999px;
-    overflow: hidden;
-    border: solid 1px var(--subtle);
-
-    .btn {
-      border-right: solid 1px var(--subtle);
-    }
-  }
-
-  ul {
-    margin-top: var(--spacing-s);
-    gap: var(--spacing-s);
-  }
-}

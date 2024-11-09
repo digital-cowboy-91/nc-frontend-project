@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CustomButton from "./CustomButton";
+import "./SortBar.style.css";
 
 const SortBar = () => {
   const [queries, setQueries] = useSearchParams();
