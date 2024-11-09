@@ -30,6 +30,8 @@ const Pagination = ({ data, onPageChange, pushToQuery = false }) => {
     pushToQuery && setQueries(newQueries);
   }
 
+  if (!prev_page && !next_page) return;
+
   return (
     <div className="pagination">
       <CustomButton
@@ -49,8 +51,8 @@ const Pagination = ({ data, onPageChange, pushToQuery = false }) => {
             active={current_page === page}
             rounded={false}
             key={page}
+            scaleOnClick={false}
             onClick={() => handlePageChange(page)}
-            style={{ fontWeight: current_page === page ? "700" : "" }}
           >
             {page}
           </CustomButton>

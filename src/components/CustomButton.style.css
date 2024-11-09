@@ -49,6 +49,8 @@
 
   cursor: pointer;
 
+  transition: all 200ms;
+
   &:hover {
     background-color: var(--btn-hover-bg);
     color: var(--btn-hover-text);
@@ -107,4 +109,10 @@
 
 .btn-border {
   --btn-border: var(--border);
+}
+
+.btn-scale-on-click {
+  &:active {
+    scale: 0.95;
+  }
 }

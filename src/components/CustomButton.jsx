@@ -13,6 +13,7 @@ const CustomButton = ({
   active,
   border,
   className,
+  scaleOnClick = true,
   as,
   ...props
 }) => {
@@ -26,6 +27,7 @@ const CustomButton = ({
     tertiary && "btn-tertiary",
     active && "btn-active",
     border && "btn-border",
+    scaleOnClick && "btn-scale-on-click",
     className,
   ]
     .filter((c) => c)
