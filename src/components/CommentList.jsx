@@ -25,6 +25,11 @@ const CommentList = ({ articleId, injectThis }) => {
 
   useEffect(() => {
     if (!injectThis) return;
+    if (pagination.current_page > 1)
+      return setQueries((prevVal) => {
+        delete prevVal.page;
+        return prevVal;
+      });
 
     setData((prevVal) => {
       const newVal = structuredClone(prevVal);
