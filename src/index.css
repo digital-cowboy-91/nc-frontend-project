@@ -43,7 +43,8 @@ body {
 
 ul,
 li,
-menu {
+menu,
+button {
   all: unset;
 }
 
