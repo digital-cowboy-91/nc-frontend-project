@@ -111,23 +111,6 @@ select {
   gap: var(--spacing);
 }
 
-.article-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing);
-  transition: all 200ms;
-
-  title {
-    font-size: 2rem;
-    margin: var(--spacing) 0;
-  }
-
-  &:hover {
-    scale: 1.01;
-    box-shadow: 0 5px 10px #bebebebe;
-  }
-}
-
 .article-meta {
   display: flex;
   justify-content: space-between;
@@ -185,10 +168,12 @@ select {
   }
 }
 
-.image-wrapper {
+.hero-wrapper {
   height: 300px;
   overflow: hidden;
   border-radius: var(--radius-m);
+  background-color: var(--subtle);
+
   img {
     object-fit: cover;
     width: 100%;

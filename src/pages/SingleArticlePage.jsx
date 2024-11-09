@@ -37,7 +37,7 @@ const SingleArticlePage = () => {
   return (
     <>
       <article className="content-wrapper">
-        <div className="image-wrapper">
+        <div className="hero-wrapper">
           <img src={article_img_url} />
         </div>
         <h1>{title}</h1>
