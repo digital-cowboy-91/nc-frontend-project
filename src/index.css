@@ -436,4 +436,9 @@ select {
   background-color: hsl(from var(--deafult-color) h s l / 0.1);
   text-wrap: wrap;
   line-height: 1.2rem;
+
+  li {
+    display: list-item;
+    list-style-type: none;
+  }
 }
