@@ -1,5 +1,8 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { DoubleArrowLeft } from "./icons/DoubleArrow";
+import CustomButton from "./CustomButton";
+import "./Pagination.style.css";
 
 const Pagination = ({ data, onPageChange, pushToQuery = false }) => {
   const { current_page, next_page, prev_page, total_count, total_pages } = data;
@@ -29,24 +32,39 @@ const Pagination = ({ data, onPageChange, pushToQuery = false }) => {
 
   return (
     <div className="pagination">
-      <button onClick={() => handlePageChange(prev_page)} disabled={!prev_page}>
-        Previous
-      </button>
+      <CustomButton
+        square
+        secondary
+        border
+        onClick={() => handlePageChange(prev_page)}
+        disabled={!prev_page}
+      >
+        <DoubleArrowLeft />
+      </CustomButton>
       <div className="pages">
         {pages.map((page) => (
-          <button
+          <CustomButton
+            square
+            secondary
+            active={current_page === page}
+            rounded={false}
             key={page}
             onClick={() => handlePageChange(page)}
-            className={current_page === page ? "active" : ""}
             style={{ fontWeight: current_page === page ? "700" : "" }}
           >
             {page}
-          </button>
+          </CustomButton>
         ))}
       </div>
-      <button onClick={() => handlePageChange(next_page)} disabled={!next_page}>
-        Next
-      </button>
+      <CustomButton
+        square
+        secondary
+        border
+        onClick={() => handlePageChange(next_page)}
+        disabled={!next_page}
+      >
+        <DoubleArrowLeft style={{ transform: "rotate(180deg)" }} />
+      </CustomButton>
     </div>
   );
 };
