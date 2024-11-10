@@ -1,6 +1,7 @@
 import React from "react";
 import { IconHeart } from "./icons/IconHeart";
 import { IconHeartBroken } from "./icons/IconHeartBroken";
+import "./VoteStat.style.css";
 
 const VoteStat = ({ value }) => {
   return (
