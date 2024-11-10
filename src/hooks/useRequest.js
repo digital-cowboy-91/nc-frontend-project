@@ -20,6 +20,8 @@ export function useRequest(
     onSuccess = (res) => res,
     onError = (res) => res,
   }) {
+    const tsStart = new Date().getTime();
+
     setIsProcessing(true);
 
     return apiCallback(...withArgs)
@@ -31,7 +33,18 @@ export function useRequest(
         onError(err);
         setError({ status, message: response.data.msg, path: pathname });
       })
-      .finally(() => setIsProcessing(false));
+      .finally(() => {
+        const tsEnd = new Date().getTime();
+
+        const diff = tsEnd - tsStart;
+        const minDelay = 500;
+
+        const delay = diff >= minDelay ? 0 : minDelay - diff;
+
+        setTimeout(() => {
+          setIsProcessing(false);
+        }, delay);
+      });
   }
 
   return {
