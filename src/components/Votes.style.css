@@ -1,0 +1,46 @@
+.vote-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: calc(var(--padding) / 2) var(--padding);
+
+  span {
+    font-weight: 500;
+    width: 2rem;
+    text-align: center;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  &.positive,
+  &.negative {
+    &,
+    svg {
+      color: var(--light);
+    }
+  }
+
+  &.positive {
+    background-color: var(--secondary);
+  }
+
+  &.negative {
+    background-color: var(--danger);
+  }
+}
+
+.icon-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: none;
+  border: none;
+  color: var(--foreground);
+
+  &:disabled {
+    color: var(--subtle);
+  }
+}

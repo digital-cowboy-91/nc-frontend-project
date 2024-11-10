@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 import { useRequest } from "../hooks/useRequest";
 import { patchArticle, patchComment } from "../utils/api";
 import { IconArrow } from "./icons/IconArrow";
+import "./Votes.style.css";
 
 const Votes = ({ defaultValue, type, typeId }) => {
   const { userCtx } = useContext(UserContext);
@@ -64,9 +65,13 @@ const Votes = ({ defaultValue, type, typeId }) => {
 
   return (
     <div
-      className={`vote-wrapper ${userVote === -1 && "negative"} ${
-        userVote === 1 && "positive"
-      }`}
+      className={[
+        "vote-wrapper",
+        userVote === -1 && "negative",
+        userVote === 1 && "positive",
+      ]
+        .filter((c) => c)
+        .join(" ")}
     >
       <button
         className="icon-btn"
