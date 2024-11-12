@@ -1,6 +1,6 @@
 # Frontend for NC News
 
-[See Live App](https://ncnews.colaia.dev/)
+[Live App](https://ncnews.colaia.dev/)
 
 This is a **React-based** frontend application for **NC News** that allows users to view and interact with articles, comments, and vote on both. It consumes the backend API to display articles, handle sorting, pagination, and more.
 
@@ -47,6 +47,10 @@ The application is deployed and hosted on a **DigitalOcean Droplet**, making it 
    ```bash
    npm run dev
    ```
+
+## See also
+
+1. [Backend for NC News](https://github.com/digital-cowboy-91/nc-backend-project)
 
 ---
 
